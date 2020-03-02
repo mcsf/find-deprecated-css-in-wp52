@@ -1,0 +1,22 @@
+.wp-block-quote {
+	position: relative;
+}
+
+.wp-block-quote::before {
+	content: "“";
+	color: rgb(155, 81, 224);
+	position: absolute;
+	top: -20px;
+	left: -25px;
+	font-size: 50px;
+	/* Possible theme bug: */
+	font-family: "Inter var", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.editor-block-list__block.block-editor-block-list__block {
+	background: red !important;
+}
+
+.editor-inserter__toggle {
+	background: pink !important;
+}

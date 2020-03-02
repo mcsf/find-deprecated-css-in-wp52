@@ -1,0 +1,8 @@
+{
+	"plugins": [
+		".",
+		"~/gutenberg/"
+	],
+	"port": 9002,
+	"testsPort": 9003
+}
