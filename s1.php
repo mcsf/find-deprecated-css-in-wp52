@@ -24,7 +24,8 @@ function s1_assets() {
 	);
 	wp_enqueue_script(
 		's1-find-css-deprecations',
-		plugins_url( 'find-css-deprecations.js', __FILE__ )
+		plugins_url( 'dist.js', __FILE__ ),
+		array( 'wp-data' )
 	);
 }
 add_action( 'enqueue_block_assets', 's1_assets' );
