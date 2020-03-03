@@ -18,13 +18,13 @@ store.subscribe( () => {
 	}
 } );
 
-function warnDeprecation( { rule, match }, i ) {
+function warnDeprecation( { rule, match, backwardsCompatible }, i ) {
 	const origin = rule.parentStyleSheet.href ?
 		`stylesheet ${ rule.parentStyleSheet.href }` :
 		`inline stylesheet`;
 	const warning = `Deprecated class \`${ match }\` found in ${ origin }.`;
 	const details = `For debugging, see \`wp.data.select( '${ storeKey }' ).getDeprecations()[ ${ i } ]\`.`;
-	console.warn( warning, details );
+	console[ backwardsCompatible ? 'info' : 'warn' ]( warning, details );
 }
 
 dispatch( storeKey ).start( document.styleSheets );

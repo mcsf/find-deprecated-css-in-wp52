@@ -14,10 +14,27 @@ test( 'getDeprecatedMatches', () => {
 		{
 			match: '.editor-autocomplete',
 			rule: styleSheet.cssRules[ 1 ],
+			backwardsCompatible: false,
 		},
 		{
 			match: '.editor-autocomplete--inner',
 			rule: styleSheet.cssRules[ 2 ],
+			backwardsCompatible: false,
+		},
+	] );
+} );
+
+test( 'it recognizes selectors that are intentionally backwards compatible', () => {
+	const styleSheet = {
+		cssRules: [
+			{ selectorText: '.block-editor-autocomplete--inner foo, .editor-autocomplete--inner foo' },
+		],
+	};
+	expect( getDeprecatedMatches( styleSheet ) ).toEqual( [
+		{
+			match: '.editor-autocomplete--inner',
+			rule: styleSheet.cssRules[ 0 ],
+			backwardsCompatible: true,
 		},
 	] );
 } );

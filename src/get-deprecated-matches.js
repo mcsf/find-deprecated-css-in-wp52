@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import diff from 'fast-diff';
+
+/**
  * Internal dependencies
  */
 import once from './once';
@@ -14,7 +19,9 @@ export default function getDeprecatedMatches( styleSheet ) {
 
 	return Array.from( styleSheet.cssRules ).map( ( rule ) => {
 		const match = rule.selectorText ? matchDeprecations( rule.selectorText ) : null;
-		return match ? { rule, match } : null;
+		if ( ! match ) return null;
+		const backwardsCompatible = isBackwardsCompatible( rule.selectorText );
+		return { rule, match, backwardsCompatible };
 	} ).filter( Boolean );
 }
 
@@ -22,6 +29,19 @@ function matchDeprecations( selectorText ) {
 	const matches = selectorText.match( generateDeprecationsRegExp() );
 	if ( ! matches ) return null;
 	return matches[ 0 ];
+}
+
+function isBackwardsCompatible( selectorText ) {
+	const parts = selectorText.split( ',' );
+	if ( parts.length !== 2 ) return false;
+
+	const additions = diff( ...parts )
+		// Keep insertions and deletions
+		.filter( ( [ type ] ) => type !== 0 )
+		// Ignore whitespace hunks
+		.filter( ( [ _, text ] ) => text.trim() );
+
+	return additions.length === 1 && additions[ 0 ][ 1 ] === 'block-';
 }
 
 function isAllowedStyleSheet( styleSheet ) {
