@@ -940,9 +940,14 @@
    * WordPress dependencies
    */
 
+  let previousProgress;
   store.subscribe( () => {
   	const { getDeprecations, getProgress } = data.select( storeKey );
   	const progress = getProgress();
+
+  	if ( progress === previousProgress ) return;
+  	previousProgress = progress;
+
   	console.log( `Scanning CSS… ${ formatPercentage( progress ) }` );
   	if ( progress === 1 ) {
   		getDeprecations().forEach( warnDeprecation );

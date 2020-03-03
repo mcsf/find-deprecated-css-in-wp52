@@ -9,9 +9,14 @@ import { select, dispatch } from '@wordpress/data';
 import store, { storeKey } from './store';
 import formatPercentage from './format-percentage';
 
+let previousProgress;
 store.subscribe( () => {
 	const { getDeprecations, getProgress } = select( storeKey );
 	const progress = getProgress();
+
+	if ( progress === previousProgress ) return;
+	previousProgress = progress;
+
 	console.log( `Scanning CSS… ${ formatPercentage( progress ) }` );
 	if ( progress === 1 ) {
 		getDeprecations().forEach( warnDeprecation );
