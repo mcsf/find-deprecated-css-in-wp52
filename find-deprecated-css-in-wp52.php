@@ -8,10 +8,6 @@
  */
 
 function fdcw52_assets() {
-	wp_enqueue_style(
-		'fdcw52-style',
-		plugins_url( 'style.css', __FILE__ )
-	);
 	wp_enqueue_script(
 		'fdcw52-find-css-deprecations',
 		plugins_url( 'find-deprecated-css-in-wp52.js', __FILE__ ),
