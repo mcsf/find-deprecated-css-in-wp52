@@ -13,8 +13,5 @@
     "start": "rollup -cw"
   },
   "author": "",
-  "license": "ISC",
-  "externals": {
-    "@wordpress/data": "wp.data"
-  }
+  "license": "ISC"
 }
