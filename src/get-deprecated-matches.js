@@ -25,7 +25,7 @@ export default function getDeprecatedMatches( styleSheet ) {
 	} ).filter( Boolean );
 }
 
-function matchDeprecations( selectorText ) {
+export function matchDeprecations( selectorText ) {
 	const matches = selectorText.match( generateDeprecationsRegExp() );
 	if ( ! matches ) return null;
 	return matches[ 0 ];
@@ -55,7 +55,7 @@ function isAllowedStyleSheet( styleSheet ) {
 
 const generateDeprecationsRegExp = once( () => {
 	const disjunction = movedComponents
-		.map( ( component ) => `\\.editor-${ component }([_-][A-z0-9_-]+)?` )
+		.map( ( component ) => `\\.editor-${ component }(?![A-z0-9])[A-z0-9_-]*` )
 		.join( '|' );
 	return new RegExp( `(${ disjunction })` );
 } );

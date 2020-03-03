@@ -830,7 +830,7 @@
 
   const generateDeprecationsRegExp = once( () => {
   	const disjunction = movedComponents
-  		.map( ( component ) => `\\.editor-${ component }([_-][A-z0-9_-]+)?` )
+  		.map( ( component ) => `\\.editor-${ component }(?![A-z0-9])[A-z0-9_-]*` )
   		.join( '|' );
   	return new RegExp( `(${ disjunction })` );
   } );
