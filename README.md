@@ -1,1 +1,1 @@
-![Animated illustration](screencast.gif?raw=true)
+![Illustration](screenshot.png?raw=true)
