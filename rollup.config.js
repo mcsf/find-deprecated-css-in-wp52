@@ -2,7 +2,7 @@ export default {
 	input: 'src/index.js',
 	external: ['@wordpress/data'],
 	output: {
-		file: 'dist.js',
+		file: 'find-deprecated-css-in-wp52.js',
 		format: 'iife',
 		name: 'CssDeprecations',
 		globals: {

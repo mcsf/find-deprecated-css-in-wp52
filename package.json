@@ -2,7 +2,7 @@
   "name": "find-wordpress-deprecated-css",
   "version": "1.0.0",
   "description": "",
-  "main": "dist.js",
+  "main": "find-deprecated-css-in-wp52.js",
   "dependencies": {},
   "devDependencies": {
     "@wordpress/data": "^4.14.1",

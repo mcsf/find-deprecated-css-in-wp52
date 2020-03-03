@@ -14,7 +14,7 @@ function fdcw52_assets() {
 	);
 	wp_enqueue_script(
 		'fdcw52-find-css-deprecations',
-		plugins_url( 'dist.js', __FILE__ ),
+		plugins_url( 'find-deprecated-css-in-wp52.js', __FILE__ ),
 		array( 'wp-data' )
 	);
 }
