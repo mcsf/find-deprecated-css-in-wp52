@@ -22,6 +22,7 @@ test( 'getDeprecatedMatches', () => {
 			{ id: 1, selectorText: '.editor-autocomplete foo' },
 			{ id: 2, selectorText: '.editor-autocomplete--inner foo' },
 			{ id: 3, selectorText: '.editor-autocompleters__block .block-editor-block-icon' },
+			{ id: 4, selectorText: '.block-editor-autocomplete--inner foo, .editor-autocomplete--inner foo' },
 		],
 	};
 	expect( getDeprecatedMatches( styleSheet ) ).toEqual( [
@@ -35,19 +36,9 @@ test( 'getDeprecatedMatches', () => {
 			rule: styleSheet.cssRules[ 2 ],
 			backwardsCompatible: false,
 		},
-	] );
-} );
-
-test( 'it recognizes selectors that are intentionally backwards compatible', () => {
-	const styleSheet = {
-		cssRules: [
-			{ selectorText: '.block-editor-autocomplete--inner foo, .editor-autocomplete--inner foo' },
-		],
-	};
-	expect( getDeprecatedMatches( styleSheet ) ).toEqual( [
 		{
 			match: '.editor-autocomplete--inner',
-			rule: styleSheet.cssRules[ 0 ],
+			rule: styleSheet.cssRules[ 4 ],
 			backwardsCompatible: true,
 		},
 	] );
