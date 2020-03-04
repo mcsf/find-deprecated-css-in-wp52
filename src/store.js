@@ -24,9 +24,6 @@ const actions = {
 	receiveDeprecations( deprecations ) {
 		return { type: 'RECEIVE_DEPRECATIONS', deprecations };
 	},
-	advance() {
-		return { type: 'ADVANCE' };
-	},
 	*run() {
 		yield { type: 'RUN' };
 	},
@@ -37,7 +34,6 @@ const actions = {
 	*next( styleSheet ) {
 		const deprecations = getDeprecatedMatches( styleSheet );
 		yield actions.receiveDeprecations( deprecations );
-		yield actions.advance();
 	},
 };
 
@@ -60,11 +56,6 @@ const store = registerStore( storeKey, {
 						...state.deprecations,
 						...action.deprecations,
 					],
-				};
-
-			case 'ADVANCE':
-				return {
-					...state,
 					processedSheetsCount: state.processedSheetsCount + 1,
 					pendingStyleSheets: state.pendingStyleSheets.slice( 1 ),
 				};

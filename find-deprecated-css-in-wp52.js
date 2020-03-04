@@ -855,9 +855,6 @@
   	receiveDeprecations( deprecations ) {
   		return { type: 'RECEIVE_DEPRECATIONS', deprecations };
   	},
-  	advance() {
-  		return { type: 'ADVANCE' };
-  	},
   	*run() {
   		yield { type: 'RUN' };
   	},
@@ -868,7 +865,6 @@
   	*next( styleSheet ) {
   		const deprecations = getDeprecatedMatches( styleSheet );
   		yield actions.receiveDeprecations( deprecations );
-  		yield actions.advance();
   	},
   };
 
@@ -891,11 +887,6 @@
   						...state.deprecations,
   						...action.deprecations,
   					],
-  				};
-
-  			case 'ADVANCE':
-  				return {
-  					...state,
   					processedSheetsCount: state.processedSheetsCount + 1,
   					pendingStyleSheets: state.pendingStyleSheets.slice( 1 ),
   				};
