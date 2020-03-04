@@ -831,6 +831,10 @@
   const generateDeprecationsRegExp = once( () => {
   	const disjunction = movedComponents
   		.map( ( component ) => `\\.editor-${ component }(?![A-z0-9])[A-z0-9_-]*` )
+  		.concat( [
+  			// https://github.com/WordPress/gutenberg/pull/19010
+  			'.block-editor-block-list__block-edit',
+  		] )
   		.join( '|' );
   	return new RegExp( `(${ disjunction })` );
   } );

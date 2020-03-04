@@ -13,6 +13,11 @@ test( 'matchDeprecations', () => {
 	// Despite string match, is unrelated to component namespace `autocomplete`
 	expect( matchDeprecations( '.editor-autocompleters__block foo' ) )
 		.toEqual( null );
+	// https://github.com/WordPress/gutenberg/pull/19010
+	expect( matchDeprecations( '.block-editor-block-list__block-edit' ) )
+		.toEqual( '.block-editor-block-list__block-edit' );
+	expect( matchDeprecations( '.block-editor-block-list__block' ) )
+		.toEqual( null );
 } );
 
 test( 'getDeprecatedMatches', () => {
