@@ -16,7 +16,7 @@ const DEFAULT_STATE = {
 	processedSheetsCount: 0,
 	initialSheetsCount: 0,
 };
- 
+
 const actions = {
 	init( pendingStyleSheets ) {
 		return { type: 'INIT', pendingStyleSheets };
@@ -40,10 +40,10 @@ const actions = {
 		yield actions.advance();
 	},
 };
- 
+
 const store = registerStore( storeKey, {
-    reducer( state = DEFAULT_STATE, action ) {
-        switch ( action.type ) {
+	reducer( state = DEFAULT_STATE, action ) {
+		switch ( action.type ) {
 			case 'INIT':
 				const pendingStyleSheets = Array.from( action.pendingStyleSheets );
 				return {
@@ -61,19 +61,19 @@ const store = registerStore( storeKey, {
 						...action.deprecations,
 					],
 				};
- 
+
 			case 'ADVANCE':
 				return {
 					...state,
 					processedSheetsCount: state.processedSheetsCount + 1,
 					pendingStyleSheets: state.pendingStyleSheets.slice( 1 ),
 				};
-        }
- 
-        return state;
-    },
- 
-    actions,
+		}
+
+		return state;
+	},
+
+	actions,
 
 	controls: {
 		RUN: createRegistryControl( ( registry ) => () => {
@@ -86,19 +86,19 @@ const store = registerStore( storeKey, {
 			}
 		} ),
 	},
- 
-    selectors: {
-        getProgress( state ) {
-            const { processedSheetsCount, initialSheetsCount } = state;
+
+	selectors: {
+		getProgress( state ) {
+			const { processedSheetsCount, initialSheetsCount } = state;
 			return initialSheetsCount ? processedSheetsCount / initialSheetsCount : null;
-        },
+		},
 		getNextStyleSheet( state ) {
 			return state.pendingStyleSheets[ 0 ];
 		},
 		getDeprecations( state ) {
 			return state.deprecations;
 		},
-    },
+	},
 } );
 
 export default store;
