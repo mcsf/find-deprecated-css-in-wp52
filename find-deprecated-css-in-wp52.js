@@ -858,14 +858,14 @@
   	advance() {
   		return { type: 'ADVANCE' };
   	},
-  	* run() {
+  	*run() {
   		yield { type: 'RUN' };
   	},
-  	* start( pendingStyleSheets ) {
+  	*start( pendingStyleSheets ) {
   		yield actions.init( pendingStyleSheets );
   		yield actions.run();
   	},
-  	* next( styleSheet ) {
+  	*next( styleSheet ) {
   		const deprecations = getDeprecatedMatches( styleSheet );
   		yield actions.receiveDeprecations( deprecations );
   		yield actions.advance();
